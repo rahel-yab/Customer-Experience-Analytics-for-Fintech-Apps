@@ -1,4 +1,4 @@
-# Customer Experience ANALYTICS
+# Customer Experience Analytics For Fintech
 
 # 🌟 Project Overview
 

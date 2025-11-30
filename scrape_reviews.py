@@ -4,7 +4,7 @@ from google_play_scraper import reviews_all, Sort
 # --- Configuration ---
 BANK_APPS = {
     'CBE': 'com.combanketh.mobilebanking',
-    'Bank of America': 'com.boa.boaMobileBanking',
+    'Bank of Abyssinia': 'com.boa.boaMobileBanking',
     'Dashen Bank': 'com.dashen.dashensuperapp'
 }
 MIN_REVIEWS_PER_BANK = 400

@@ -1,0 +1,11 @@
+# Python Environment
+venv/
+__pycache__/
+
+# Data Files (Keep large data out of Git)
+*.xlsx
+
+# Operating System Files
+.DS_Store
+
+01_raw_reviews.csv

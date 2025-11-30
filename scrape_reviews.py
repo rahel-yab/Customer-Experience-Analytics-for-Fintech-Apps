@@ -3,9 +3,9 @@ from google_play_scraper import reviews_all, Sort
 
 # --- Configuration ---
 BANK_APPS = {
-    'Bank_A': 'com.package.id.for.bankA', # REPLACE WITH ACTUAL ID
-    'Bank_B': 'com.package.id.for.bankB', # REPLACE WITH ACTUAL ID
-    'Bank_C': 'com.package.id.for.bankC'  # REPLACE WITH ACTUAL ID
+    'CBE': 'com.combanketh.mobilebanking',
+    'Bank of America': 'com.boa.boaMobileBanking',
+    'Dashen Bank': 'com.dashen.dashensuperapp'
 }
 MIN_REVIEWS_PER_BANK = 400
 
@@ -54,3 +54,36 @@ raw_df = pd.concat(all_data, ignore_index=True)
 # Save the raw data before full cleaning (optional, but good practice)
 raw_df.to_csv('01_raw_reviews.csv', index=False)
 print("\n--- Raw data saved. Starting Preprocessing... ---")
+
+
+# --- Preprocessing Steps ---
+
+# 1. Drop Duplicates
+clean_df = raw_df.drop_duplicates(subset=['review', 'date', 'bank'])
+print(f"Removed {len(raw_df) - len(clean_df)} duplicate reviews.")
+
+# 2. Handle Missing Data
+# The KPI is <5% errors/missing. We remove rows with missing critical data.
+clean_df.dropna(subset=['review', 'rating'], inplace=True)
+print(f"Removed rows with missing reviews or ratings.")
+
+# 3. Normalize Date Format (to YYYY-MM-DD)
+# The 'date' column is a datetime object after scraping (under the hood).
+# Convert it to a datetime object, then format it as a string.
+clean_df['date'] = pd.to_datetime(clean_df['date']).dt.strftime('%Y-%m-%d')
+print("Dates normalized to YYYY-MM-DD format.")
+
+# 4. Final KPI Check
+total_reviews = len(clean_df)
+print(f"\n--- KPI CHECK ---")
+print(f"Total clean reviews collected: **{total_reviews}**")
+if total_reviews >= 1200:
+    print("✅ Volume KPI (1,200+) Met.")
+else:
+    print(f"⚠️ Volume KPI not met. Scraped {total_reviews}. You may need to run the scraper again or find more App IDs.")
+
+# 5. Save Final Clean Data
+# Ensure columns are exactly as required: review, rating, date, bank, source
+final_columns = ['review', 'rating', 'date', 'bank', 'source']
+clean_df[final_columns].to_csv('clean_bank_reviews.csv', index=False)
+print("\n✅ Final Clean CSV saved as **clean_bank_reviews.csv**")

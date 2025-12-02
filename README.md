@@ -54,22 +54,22 @@ source venv/bin/activate
 
 ### 3. Install Dependencies
 Install all required libraries, including the deep learning components for the sentiment model.
+
 ```bash
 pip install transformers torch nltk scikit-learn pandas google-play-scraper 
 ```
 
 ### 4. Run the Pipeline
 The process involves two main steps:
+Step A: Data Scraping (Task 1)
+This generates the primary input file (clean_bank_reviews.csv).
 
-    Step A: Data Scraping (Task 1)
-    This generates the primary input file (clean_bank_reviews.csv).
+    ```bash
+    python scrape_reviews.py
+    ```
 
-        ```bash
-        python scrape_reviews.py
-        ```
-
-    Step B: Analysis and Aggregation (Tasks 2 & 3)
-    This executes the NLP models and generates the final analytical output (sentiment_and_themes.csv).
+Step B: Analysis and Aggregation (Tasks 2 & 3)
+This executes the NLP models and generates the final analytical output (sentiment_and_themes.csv).
 
         ```bash
         python analysis_pipeline_final.py

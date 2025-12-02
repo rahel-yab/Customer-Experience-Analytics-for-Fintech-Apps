@@ -64,16 +64,16 @@ The process involves two main steps:
 Step A: Data Scraping (Task 1)
 This generates the primary input file (clean_bank_reviews.csv).
 
-    ```bash
-    python scrape_reviews.py
-    ```
+```bash
+python scrape_reviews.py
+```
 
 Step B: Analysis and Aggregation (Tasks 2 & 3)
 This executes the NLP models and generates the final analytical output (sentiment_and_themes.csv).
 
-        ```bash
-        python analysis_pipeline_final.py
-        ```
+```bash
+python analysis_pipeline_final.py
+```
 
 ### 5. Final Output
 The sentiment_and_themes.csv file contains the original review data augmented with the sentiment_label, sentiment_score, and identified_theme(s), providing the quantitative foundation for the final report.
